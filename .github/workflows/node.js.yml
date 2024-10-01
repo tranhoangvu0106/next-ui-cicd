@@ -26,7 +26,10 @@ jobs:
       - name: SSH Deploy
         # Use the 'appleboy/ssh-action' action for SSH deployment
         run: |
-          cd /home/vp
+          if [ ! -d "/home/vp/data/.git" ]; then
+            git clone https://github.com/tranhoangvu0106/next-ui-cicd.git /home/vp/data
+          fi
+          cd /home/vp/data
           git pull
           npm install
           npm run build
